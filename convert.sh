@@ -11,11 +11,13 @@ function export_to_csv {
   cat $1 |jq -r '.[]|[.f1, .f2, .f3]|@csv'
 }
 
-function extract_status {
+function main {
   selected_fields=$(mktemp)
   selected_fields $1 > "${selected_fields}"
 
   result=$(mktemp)
   clean_up_fields "${selected_fields}" > "${result}"
-  export_to_csv "${result}" > result.csv
+  export_to_csv "${result}"
 }
+
+main $1 > result.csv
