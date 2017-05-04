@@ -21,17 +21,21 @@ function download_results {
   cat "${all}" | jq -r '.hits.hits[]._source'
 }
 
-function main {
-  download=$(mktemp)
-  download_results > "${download}"
-
+function convert_json_to_csv {
   selected_fields=$(mktemp)
-  select_fields "${download}" > "${selected_fields}"
+  select_fields $1 > "${selected_fields}"
 
   result=$(mktemp)
   clean_up_fields "${selected_fields}" > "${result}"
 
   export_to_csv "${result}"
+}
+
+function main {
+  download=$(mktemp)
+  download_results > "${download}"
+
+  convert_json_to_csv "${download}"
 }
 
 
