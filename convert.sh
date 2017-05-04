@@ -21,6 +21,7 @@ function main {
 
   result=$(mktemp)
   clean_up_fields "${selected_fields}" > "${result}"
+
   export_to_csv "${result}"
 }
 
