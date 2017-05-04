@@ -3,12 +3,12 @@ function select_fields {
 }
 
 function clean_up_fields {
-  cat selected_fields.jq | sed 's/\s*\("f3"\).*<name>\([^<]\+\)<\/name>.*/\1: "\2"/' > result.json
+  cat $1 | sed 's/\s*\("f3"\).*<name>\([^<]\+\)<\/name>.*/\1: "\2"/'
 }
 
 function extract_status {
   selected_fields $1 > selected_fields.jq
-  clean_up_fields selected_fields.jq
+  clean_up_fields selected_fields.jq > result.json
   echo '"F1","F2","F3"' > result.csv
   cat result.json|jq -r '.[]|[.f1, .f2, .f3]|@csv' >> result.csv
 }
