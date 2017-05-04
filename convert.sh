@@ -21,7 +21,7 @@ function download_results {
   cat "${all}" | jq -r '.hits.hits[]._source'
 }
 
-function convert_json_to_csv {
+function select_fields_into_csv {
   selected_fields=$(mktemp)
   select_fields $1 > "${selected_fields}"
 
@@ -35,7 +35,7 @@ function main {
   download=$(mktemp)
   download_results > "${download}"
 
-  convert_json_to_csv "${download}"
+  select_fields_into_csv "${download}"
 }
 
 
