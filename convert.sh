@@ -40,4 +40,7 @@ function main {
 
 ## Usage
 #./$0 $YOUR_ELASTICSEARCH_URL_WITH_QUERY > destination.csv
+
+
+#Inspired by https://google.github.io/styleguide/shell.xml
 main $1
