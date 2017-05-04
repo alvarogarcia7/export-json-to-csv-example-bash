@@ -1,10 +1,9 @@
 function select_fields {
-  cat $1 | jq '[.hits.hits[]._source | {"f1": .f1, "f2": .f2, f3}]' > selected_fields.jq
+  cat $1 | jq '[.hits.hits[]._source | {"f1": .f1, "f2": .f2, f3}]'
 }
-  
 
 function extract_status {
-  selected_fields $1
+  selected_fields $1 > selected_fields.jq
   cat selected_fields.jq | sed 's/\s*\("f3"\).*<name>\([^<]\+\)<\/name>.*/\1: "\2"/' > result.json
 
   echo '"F1","F2","F3"' > result.csv
