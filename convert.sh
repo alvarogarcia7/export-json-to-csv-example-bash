@@ -38,5 +38,6 @@ function main {
   select_fields_into_csv "${download}"
 }
 
-
-main $1 > result.csv
+## Usage
+#./$0 $YOUR_ELASTICSEARCH_URL_WITH_QUERY > destination.csv
+main $1
