@@ -17,7 +17,7 @@ function export_to_csv {
 
 function download_results {
   all=$(mktemp)
-  wget $YOUR_ELASTICSEARCH_SERVER -o "${all}" #and other options
+  wget $1 -o "${all}" #and other options
   cat "${all}" | jq -r '.hits.hits[]._source'
 }
 
@@ -33,10 +33,10 @@ function select_fields_into_csv {
 
 function main {
   download=$(mktemp)
-  download_results > "${download}"
+  download_results $1 > "${download}"
 
   select_fields_into_csv "${download}"
 }
 
 
-main > result.csv
+main $1 > result.csv
