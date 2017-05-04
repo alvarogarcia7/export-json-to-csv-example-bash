@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -euf -o pipefail
+
 function select_fields {
   cat $1 | jq '[.hits.hits[]._source | {"f1": .f1, "f2": .f2, f3}]'
 }
