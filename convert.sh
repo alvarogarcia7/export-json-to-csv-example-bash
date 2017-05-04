@@ -26,7 +26,7 @@ function main {
   download_results > "${download}"
 
   selected_fields=$(mktemp)
-  selected_fields "${download}" > "${selected_fields}"
+  select_fields "${download}" > "${selected_fields}"
 
   result=$(mktemp)
   clean_up_fields "${selected_fields}" > "${result}"
