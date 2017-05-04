@@ -12,7 +12,8 @@ function export_to_csv {
 }
 
 function extract_status {
-  selected_fields $1 > selected_fields.jq
-  clean_up_fields selected_fields.jq > result.json
+  selected_fields=$(mktemp)
+  selected_fields $1 > "${selected_fields}"
+  clean_up_fields "${selected_fields}" > result.json
   export_to_csv result.json > result.csv
 }
